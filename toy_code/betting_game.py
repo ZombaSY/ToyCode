@@ -11,25 +11,20 @@ def betting_game(bets):
 
 
 def main():
-    start_money = 100000000
-    min_bet = 100000
+    start_money = 10000000000
+    min_bet = 1000
 
     print(f'Your start seed money is {start_money:,}')
 
     seed_money = start_money
-    game_play_count = 1000
+    game_play_count = start_money // min_bet
     bets = min_bet
     max_m = 0
     min_m = start_money
     for i in range(game_play_count):
-        if seed_money > max_m:
-            max_m = seed_money
-        if seed_money < min_m:
-            min_m = seed_money
-
         if seed_money <= 0:
-            print(f'You lose in {i} game. End game')
-            print(f'bets: {bets:,}, seed_money: {seed_money:,}, max_seed: {max_m:,}, min_seed: {min_m:,}')
+            print(f'You lose in {i}th game. End game')
+            print(f'bets: {bets:,}, seed_money: {seed_money:,}, max_seed: {max_m:,}')
             exit(0)
 
         result = betting_game(bets=bets)
@@ -39,6 +34,11 @@ def main():
             bets *= multiply_factor
         else:
             bets = min_bet
+
+        if seed_money > max_m:
+            max_m = seed_money
+        if seed_money < min_m:
+            min_m = seed_money
 
     print(f'You earned {(seed_money - start_money):,}, max_seed: {max_m:,}')
 
